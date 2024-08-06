@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/banner_home2"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/style_layout_middle"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="30dp"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_weight="3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Trang chủ"
+                    android:textSize="30dp"
+                    android:textStyle="bold|italic"
+                    android:textColor="@color/white"
+                    />
+                <ImageButton
+                    android:id="@+id/btn_fragment_home_search"
+                    android:layout_gravity="center"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/icon_search1"
+                    />
+<!--                <ImageButton-->
+<!--                    android:id="@+id/btn_fragment_home_noti"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_width="30dp"-->
+<!--                    android:layout_height="30dp"-->
+<!--                    android:background="@drawable/icon_notification"-->
+<!--                    />-->
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvHelloUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Xin chào"
+                android:textColor="@color/white"
+                android:textStyle="italic"
+                />
+
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.viewpager.widget.ViewPager
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+
+                 />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="match_parent">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/banner_home3"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_weight="3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Loại hàng"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:textStyle="bold|italic" />
+<!--                <ImageView-->
+<!--                    android:padding="10dp"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:src=""/>-->
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/banner_home5"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Danh sách sản phẩm"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"
+                        android:textStyle="bold|italic" />
+
+                    <TextView
+                        android:id="@+id/tv_home_getAll"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="2"
+                        android:gravity="right"
+                        android:text="Xem tất cả"
+                        android:textColor="#2196F3"
+                        android:textSize="15dp"
+                        android:textStyle="italic" />
+                </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:background="#F8FBFF"
+                    android:layout_margin="10dp"
+                    android:id="@+id/recy_fragment_home_listFood"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="10dp"
+                    android:backgroundTint="@color/box"
+                    android:layout_marginBottom="50dp"
+                    android:layout_marginTop="10dp" />
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

@@ -1,0 +1,11 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.QQBook" parent="Theme.Design.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/black</item>
+        <!-- Đổi màu của Quick Settings -->
+<!--        <item name="android:windowBackground">@color/black</item>-->
+    </style>
+
+    <style name="Theme.QQBook" parent="Base.Theme.QQBook" />
+
+</resources>

@@ -1,0 +1,79 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".Fragment.CommentFragment">
+
+    <LinearLayout
+        android:id="@+id/title"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_alignParentTop="true">
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:textSize="18sp"
+            android:text="Bình luận"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+
+        android:id="@+id/recy_comment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:background="@color/black"
+        android:layout_marginHorizontal="20dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginVertical="15dp"
+            android:background="@color/black">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:weightSum="10"
+                android:paddingHorizontal="10dp"
+                android:layout_gravity="center"
+                android:background="@drawable/boder_radius_search"
+                android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/ed_fragment_comment"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="8"
+                    android:background="@color/white"
+                    android:hint="Nhập bình luận"
+                    android:paddingLeft="10dp" />
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/icon_emoiji"
+                    android:textColor="@color/black"
+                    android:backgroundTint="@color/white"/>
+
+                <ImageButton
+                    android:id="@+id/btn_infor_add_comment"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/icon_send"
+                    android:textColor="@color/black"
+                    android:backgroundTint="@color/white"/>
+            </LinearLayout>
+        </LinearLayout>
+
+</RelativeLayout>

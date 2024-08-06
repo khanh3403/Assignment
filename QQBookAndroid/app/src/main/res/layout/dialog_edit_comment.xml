@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:background="@drawable/style_layout_middle_black"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/style_layout_middle"
+        android:gravity="center"
+        android:padding="18dp"
+        android:text="Thông báo"
+        android:textColor="@color/white"
+        android:fontFamily="@font/dmsans_bold"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/et_edit_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nhập nội dung bình luận mới"
+        android:textColor="@color/white"
+        android:paddingLeft="15dp"
+        android:textColorHint="@color/white"
+        android:maxLines="5"
+        android:scrollbars="vertical" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_dialog_item_submit"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:background="@drawable/style_layout_middle"
+            android:text="Đồng ý"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:fontFamily="@font/dmsans_bold"
+            />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_dialog_item_cancel"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="30dp"
+            android:background="@drawable/style_layout_middle"
+            android:text="Hủy"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:fontFamily="@font/dmsans_bold"
+            />
+    </LinearLayout>
+
+
+</LinearLayout>

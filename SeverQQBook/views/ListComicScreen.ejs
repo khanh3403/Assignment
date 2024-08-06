@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>List</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+      body {
+        background-image: url("https://img.pikbest.com/templates/20240706/fruit-fruit-banner-for-supermarket-store-green-background_10654794.jpg!w700wp");
+        background-size: cover;
+        background-repeat: no-repeat;
+        display: flex;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .search-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        margin-bottom: 40px;
+      }
+
+      .search-box {
+        border-radius: 5px;
+        width: 200px;
+        height: 30px;
+        padding-left: 10px;
+        margin-right: 10px;
+      }
+
+      .search-button {
+        background-color: white;
+        font-weight: bold;
+        color: black;
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px;
+        margin-right: 10px;
+        cursor: pointer;
+      }
+
+      .product-container {
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        height: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <%- include('../views/Navbar.ejs') -%>
+    <div class="container mt-3">
+      <h2>Danh sách sản phẩm</h2>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>TÊN SẢN PHẨM</th>
+            <th>GIÁ</th>
+            <th>MÔ TẢ</th>
+            <th>NGUỒN GỐC</th>
+            <th>LOẠI HÀNG</th>
+            <th>HẠN SỬ DỤNG</th>
+            <th>ẢNH</th>
+            <th>HÌNH ẢNH CHI TIẾT</th>
+            <th>BÌNH LUẬN</th>
+            <th>SỬA</th>
+            <th>XÓA</th>
+          </tr>
+        </thead>
+        <tbody id="comicTableBody"></tbody>
+      </table>
+    </div>
+
+    <script>
+      fetch("/api/comics")
+        .then((response) => response.json())
+        .then((comics) => {
+          const tbody = document.getElementById("comicTableBody");
+
+          comics.forEach((comic) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                  <td>${comic._id}</td>
+                  <td>${comic.name}</td>
+                  <td>${comic.price}</td>
+                  <td>${comic.description}</td>
+                  <td>${comic.author}</td>
+                  <td>${comic.type}</td>
+                  <td>${comic.publishYear}</td>
+                  <td>
+
+                  <img src="/images/${comic.coverImage}" alt="Ảnh bìa" style="width: 100%; height: 100px; object-fit: cover;">
+      
+                  </td>
+                  <td>
+            <a href="/pdf/${comic.images}" target="_blank">Xem PDF</a>
+          </td>
+          <td>
+  <a href="/comments/${comic._id}" target="_blank">Comment</a>
+</td>
+
+          <td><i class="fas fa-edit" data-bs-toggle="modal" data-bs-target="#editModal" onclick="editProduct('${comic._id}', '${comic.name}', '${comic.description}', '${comic.author}', '${comic.type}', '${comic.publishYear}')"></i></td>
+      <td onclick="deleteComic('${comic._id}')"><i class="fas fa-trash-alt"></i></td>
+                  
+              `;
+            tbody.appendChild(row);
+            console.log("Danh sách ảnh :", comic.images);
+          });
+        })
+        .catch((error) => {
+          console.error("Error fetching products:", error);
+        });
+      ///
+      function editProduct(
+        comicId,
+        comicName,
+        comicDes,
+        comicAuthor,
+        comicType,
+        comicPublish,
+        comicCoverImage,
+        comicImages
+      ) {
+        const editModal = document.getElementById("editModal");
+
+        const editIdInput = document.getElementById("editId");
+        const editNameInput = document.getElementById("editName");
+        const editDesInput = document.getElementById("editDes");
+        const editAuthorInput = document.getElementById("editAuthor");
+        const editTypeInput = document.getElementById("editType");
+        const editPublishInput = document.getElementById("editPublish");
+        const editCoverImageInput = document.getElementById("editCoverImage");
+        const editImagesInput = document.getElementById("editImages");
+
+        editIdInput.value = comicId;
+        editNameInput.value = comicName;
+        editDesInput.value = comicDes;
+        editAuthorInput.value = comicAuthor;
+        editTypeInput.src = comicType;
+        editPublishInput.value = comicPublish;
+        editCoverImageInput.src = comicCoverImage;
+        editImagesInput.src = comicImages;
+
+        const modalInstance = new bootstrap.Modal(editModal);
+        modalInstance.show();
+      }
+      function saveChanges() {
+        const editIdInput = document.getElementById("editId").value;
+        const editNameInput = document.getElementById("editName").value;
+        const editDesInput = document.getElementById("editDes").value;
+        const editAuthorInput = document.getElementById("editAuthor").value;
+        const editTypeInput = document.getElementById("editType").value;
+        const editPublishInput = document.getElementById("editPublish").value;
+        const editCoverImageInput =
+          document.getElementById("editCoverImage").value;
+        const editImagesInput = document.getElementById("editImages").value;
+
+        var form = document.getElementById("editProductForm");
+        var formData = new FormData(form);
+
+        formData.append("id", editIdInput);
+        formData.append("name", editNameInput);
+        formData.append("description", editDesInput);
+        formData.append("author", editAuthorInput);
+        formData.append("type", editTypeInput);
+        formData.append("publishYear", editPublishInput);
+        formData.append("coverImage", editCoverImageInput);
+        formData.append("images", editImagesInput);
+
+        fetch(`/comic/update/${editIdInput}`, {
+          method: "PUT",
+          body: formData,
+        })
+          .then((response) => {
+            if (response.status == 200) {
+              alert("Insert successfully !!!");
+              const modalInstance = bootstrap.Modal.getInstance(
+                document.getElementById("editModal")
+              );
+              modalInstance.hide();
+              window.location.href = "/comic";
+            } else {
+              alert("Insert failed already exists");
+            }
+          })
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((err) => {
+            console.error("Error updating product:", err);
+          });
+      }
+
+      ///
+      function deleteComic(comicId) {
+        if (confirm("Bạn có muốn xóa?")) {
+          fetch(`/comic/delete/${comicId}`, {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((response) => {
+              if (response.ok) {
+                alert("Comic deleted successfully!");
+                window.location.reload();
+              } else {
+                alert("Error deleting comic. Please try again.");
+              }
+            })
+            .catch((error) => {
+              console.error("Error deleting product:", error);
+            });
+        }
+      }
+    </script>
+    <!-- Edit Modal -->
+    <form id="editProductForm">
+      <div
+        class="modal fade"
+        id="editModal"
+        tabindex="-1"
+        aria-labelledby="editModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editModalLabel">Sửa thông tin</h5>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <label for="editId" class="form-label">Id:</label>
+                <input type="text" class="form-control" id="editId" readonly />
+              </div>
+              <div class="mb-3">
+                <label for="editName" class="form-label">TÊN SẢN PHẨM:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editName"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="editDes" class="form-label">MÔ TẢ:</label>
+                <input type="text" class="form-control" id="editDes" required />
+              </div>
+              <div class="mb-3">
+                <label for="editAuthor" class="form-label">NGUỒN GỐC:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editAuthor"
+                  required
+                />
+              </div>
+              <div class="mb-3 mt-3">
+                <label for="editType" class="form-label">LOẠI HÀNG:</label>
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  name="editType"
+                  id="editType"
+                >
+                  <option value="Hành Động">Trái cây có hạt</option>
+                  <option value="Tu Tiên">Trái cây không hạt</option>
+                  <option value="Chuyển Sinh">Trái cây miền nam</option>
+                  <option value="Ngôn Tình">Trái cây miền bắc</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="editPublish" class="form-label">HẠN SỬ DỤNG:</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="editPublish"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="coverImage" class="form-label">HÌNH ẢNH:</label>
+                <input
+                  type="file"
+                  class="form-control"
+                  id="editCoverImage"
+                  placeholder=".images..."
+                  name="coverImage"
+                  required
+                  multiple
+                />
+                <div class="valid-feedback">Valid.</div>
+                <div class="invalid-feedback">Please fill out this field.</div>
+              </div>
+              <!-- <div class="mb-3">
+                <label for="editCoverImage" class="form-label"
+                  >Cover Image:</label
+                >
+                <input
+                  type="file"
+                  class="form-control"
+                  id="editCoverImage"
+                  name="editCoverImage"
+                  required
+                  multiple
+                />
+              </div> -->
+              <div class="mb-3">
+                <label for="editImages" class="form-label">ẢNH CHI TIẾT:</label>
+                <input
+                  type="file"
+                  class="form-control"
+                  id="editImages"
+                  name="images"
+                  required
+                  multiple
+                />
+              </div>
+              <button
+                id="saveChangesButton"
+                type="button"
+                class="btn btn-primary"
+                onclick="saveChanges()"
+              >
+                LƯU SỬA
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/action_Home"
+        android:title="Trang Chủ"
+        android:icon="@drawable/icon_bottom_menu_home"
+        />
+    <item android:id="@+id/action_Favorite"
+        android:title="Yêu Thích"
+        android:icon="@drawable/icon_bottom_menu_favorite"/>
+    <item android:id="@+id/action_Setting"
+        android:title="Cài Đặt"
+        android:icon="@drawable/icon_bottom_menu_setting"/>
+
+</menu>
